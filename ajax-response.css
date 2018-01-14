@@ -1,0 +1,14 @@
+.carousel-item {
+	position: relative;
+	width: 100%;
+}
+
+.photoText {
+	position: absolute;
+	top: 25px;
+	left: 0px;
+	color: white;
+	background-color: black;
+	padding: 20px;
+	
+}
