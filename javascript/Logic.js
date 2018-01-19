@@ -100,11 +100,11 @@ function grabGoogleData(location, query, apiKey) {
             
             // Adding info
 
-            var newTitle = $('<div>');
+            var newTitle = $('<h5>');
             newTitle.attr('class', 'cityInfo');
             newTitle.html(placeText);
             newTitle.attr('href', '#' + counterList[counter] + '!');
-            var newOpen = $('<div>');
+            var newOpen = $('<h6>');
 
             if (resultList[i].opening_hours) {
                 var placeOpen = resultList[i].opening_hours.open_now;
@@ -120,7 +120,7 @@ function grabGoogleData(location, query, apiKey) {
 
             newTitle.append(newOpen);
 
-            var newRating = $('<div>');
+            var newRating = $('<h6>');
             newRating.html('Average user rating: ' + placeRating);
 
             newTitle.append(newRating);
