@@ -76,22 +76,22 @@ function grabGoogleData(location, query, apiKey) {
 
          for (var i = 0; i < 10; i ++) {
 
-             var photoReference = resultList[i].photos[0].photo_reference;
-             var placeText = resultList[i].name;
-             var placeRating = resultList[i].rating;
-         
-             console.log(resultList[i]);
+            var photoReference = resultList[i].photos[0].photo_reference;
+            var placeText = resultList[i].name;
+            var placeRating = resultList[i].rating;
 
-             // Adding image
-             var newImage = $('<img>');
-             var src = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&maxheight=500&photoreference=" + photoReference + "&key=" + apiKey;
-             newImage.attr('src', src);
+            console.log(resultList[i]);
 
-             var newText = $('<p>');
-             newText.attr('class', 'photoText')
-             newText.html(placeText);
-             
-             var newCarousel = $("<a>");
+            // Adding image
+            var newImage = $('<img>');
+            var src = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&maxheight=500&photoreference=" + photoReference + "&key=" + apiKey;
+            newImage.attr('src', src);
+
+            var newText = $('<p>');
+            newText.attr('class', 'photoText')
+            newText.html(placeText);
+
+            var newCarousel = $("<a>");
             newCarousel.attr('class', 'carousel-item')
             newCarousel.attr('href', '#' + counterList[counter] + '!')
             newCarousel.append(newImage);
@@ -99,6 +99,22 @@ function grabGoogleData(location, query, apiKey) {
             carousel.append(newCarousel);
             
             // Adding info
+
+            var titleSub = ""
+
+            if (query === " point of interest") {
+                titleSub = "Top Points of Interests in "
+            }
+
+            else if (query === " restaurant") {
+                titleSub = "Top Restaurants in "
+            }
+
+            else if (query === " hotel") {
+                titleSub = "Top Hotels in "
+            }
+
+            $('.titleInfo').html(titleSub + location);
 
             var newTitle = $('<div>');
             newTitle.attr('class', 'cityInfo');
@@ -116,6 +132,10 @@ function grabGoogleData(location, query, apiKey) {
                     newOpen.html("Not open now")
                 }
 
+            }
+
+            else {
+                newOpen.html("No Hours Listed")
             }
 
             newTitle.append(newOpen);
