@@ -20,26 +20,60 @@
 	    	<nav class="nav-extended">
 				<div class="nav-wrapper">
 					<a href="#!" class="brand-logo"><i class="material-icons">cloud</i>TravelOn</a>
-					<ul id="dropdown1" class="dropdown-content">
-						<li class="list"><a href="#!" id="pointsofInterest">Points of Interest</a></li>
-						<li class="divider"></li>
-						<li class="list"><a href="#!" id="restaurants">Restaurants</a></li>
-						<li class="divider"></li>
-						<li class="list"><a href="#!" id="hotels">Hotels</a></li>
-					</ul>
-					<ul class="right hide-on-med-and-down">
-						<!-- was in input but not allowing lower-case letters pattern="[A-Z a-z . ,]{1,}" title="TYPE A Freakin City Dude"  -->
-						<li class="search"><i class="material-icons left" id="searchBar">search</i><input type="search" placeholder="Enter City" id="searchTerm"></li>
+					<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+			
+					<ul class="right hide-on-med-and-down" id="nav-mobile">
+						<li>
+							<form>
+						        <div class="input-field">
+						          <label class="label-icon" for="search"><i class="material-icons" id="searchIcon">search</i></label>
+						          <input id="search" type="search" placeholder="Enter city">
+						          <i class="material-icons">close</i>
+						        </div>
+					    	</form>
+					    </li>
 						<li><a class="dropdown-button" href="#!" data-activates="dropdown1">Menu<i class="material-icons right">arrow_drop_down</i></a></li>
-				    </ul>
+				    </ul>	
+
+				   	<ul class="side-nav" id="mobile-demo">
+				   		<li class="list">
+				   			<div id="searchHeader">Search</div>
+							<form>
+						        <div class="input-field">
+						          <label class="label-icon" for="searchMenu"><i class="material-icons" id="searchIconMenu">search</i></label>
+						          <input id="searchMenu" type="search"  placeholder="Enter city">
+						          <i class="material-icons" id="closeMenu">close</i>
+						        </div>
+					    	</form>
+						</li>
+						<li class="divider"></li>
+						<li class="list"><a href="#!" id="pointsofInterestSideNav">Points of Interest</a></li>
+						<li class="divider"></li>
+						<li class="list"><a href="#!" id="restaurantsSideNav">Restaurants</a></li>
+						<li class="divider"></li>
+						<li class="list"><a href="#!" id="hotelsSideNav">Hotels</a></li>
+					</ul>
+
 				</div>
+
 				<div class="nav-content">
 					<img src="images/snow.jfif" style="opacity: 0.7" height="80px">
 					<p>Current Weather</p>
 					<p class="weather"></p>
 				</div>
 			 </nav>
-		 </div>
+
+			 <ul id="dropdown1" class="dropdown-content">
+				<li class="list"><a href="#!" id="pointsofInterest">Points of Interest</a></li>
+				<li class="divider"></li>
+				<li class="list"><a href="#!" id="restaurants">Restaurants</a></li>
+				<li class="divider"></li>
+				<li class="list"><a href="#!" id="hotels">Hotels</a></li>
+			</ul>
+		</div>
+
+
+		
 		<div class="carousel carousel-slider center">
 			<div class="row">
 				<div class = "col s1 m2">
@@ -52,6 +86,7 @@
 				</div>
 			</div>	
 		</div>
+
 		<div class="container">
 			<div class="row">
 				<div class="col s12 m6">
@@ -59,15 +94,7 @@
 						<div class="card-content white-text">
 							<span class="card-title titleInfo"></span>
 							<div class="info">
-							<!-- <p>I am a very simple card. I am good at containing small bits of information.
-							I am convenient because I require little markup to use effectively.</p>
-							<ul>
-							  <li><a href="#restaurant1">Restaurant #1</a></li>
-							  <li><a href="#restaurant2">Restaurant #2</a></li>
-							  <li><a href="#restaurant3">Restaurant #3</a></li>
-							  <li><a href="#restaurant4">Restaurant #4</a></li>
-							  <li><a href="#restaurant5">Restaurant #5</a></li>
-							</ul>   -->
+							
 							</div>
 						</div>	
 			            <div class="card-action">
@@ -122,6 +149,7 @@
             
 		<!--Import jQuery before materialize.js-->
 		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 		<script type="text/javascript" src="javascript/Logic.js"></script>
 		</body>

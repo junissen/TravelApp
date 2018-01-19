@@ -24,12 +24,27 @@ var currentIndex = 0;
 
 grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex]);
 
-$('#searchTerm').keyup(function(event) {
+$('#search').keyup(function(event) {
     if (event.keyCode === 13) {
         searchName = $(this).val();
         grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex]);
         $(this).val("");
     }
+});
+
+$('#searchMenu').keyup(function(event) {
+    if (event.keyCode === 13) {
+        $(".button-collapse").sideNav('hide');
+        searchName = $(this).val();
+        grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex]);
+        $(this).val("");
+    }
+});
+
+$(".button-collapse").sideNav();
+
+$('#closeMenu').on("click", function(event) {
+    $(".button-collapse").sideNav('hide');
 });
 
 $('#pointsofInterest').on("click", function(event) {
@@ -43,6 +58,22 @@ $('#restaurants').on("click", function(event) {
 $('#hotels').on("click", function(event) {
     grabGoogleData(searchName, hotelQuery, apiKeyArray[currentIndex])
 });
+
+$('#pointsofInterestSideNav').on("click", function(event) {
+    $(".button-collapse").sideNav('hide');
+    grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex])
+});
+
+$('#restaurantsSideNav').on("click", function(event) {
+    $(".button-collapse").sideNav('hide');
+    grabGoogleData(searchName, restaurantQuery, apiKeyArray[currentIndex])
+});
+
+$('#hotelsSideNav').on("click", function(event) {
+    $(".button-collapse").sideNav('hide');
+    grabGoogleData(searchName, hotelQuery, apiKeyArray[currentIndex])
+});
+
 
 
 function grabGoogleData(location, query, apiKey) {
@@ -76,22 +107,22 @@ function grabGoogleData(location, query, apiKey) {
 
          for (var i = 0; i < 10; i ++) {
 
-            var photoReference = resultList[i].photos[0].photo_reference;
-            var placeText = resultList[i].name;
-            var placeRating = resultList[i].rating;
+             var photoReference = resultList[i].photos[0].photo_reference;
+             var placeText = resultList[i].name;
+             var placeRating = resultList[i].rating;
+         
+             console.log(resultList[i]);
 
-            console.log(resultList[i]);
+             // Adding image
+             var newImage = $('<img>');
+             var src = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&maxheight=500&photoreference=" + photoReference + "&key=" + apiKey;
+             newImage.attr('src', src);
 
-            // Adding image
-            var newImage = $('<img>');
-            var src = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&maxheight=500&photoreference=" + photoReference + "&key=" + apiKey;
-            newImage.attr('src', src);
-
-            var newText = $('<p>');
-            newText.attr('class', 'photoText')
-            newText.html(placeText);
-
-            var newCarousel = $("<a>");
+             var newText = $('<p>');
+             newText.attr('class', 'photoText')
+             newText.html(placeText);
+             
+             var newCarousel = $("<a>");
             newCarousel.attr('class', 'carousel-item')
             newCarousel.attr('href', '#' + counterList[counter] + '!')
             newCarousel.append(newImage);
@@ -116,11 +147,11 @@ function grabGoogleData(location, query, apiKey) {
 
             $('.titleInfo').html(titleSub + location);
 
-            var newTitle = $('<div>');
+            var newTitle = $('<h5>');
             newTitle.attr('class', 'cityInfo');
             newTitle.html(placeText);
             newTitle.attr('href', '#' + counterList[counter] + '!');
-            var newOpen = $('<div>');
+            var newOpen = $('<h6>');
 
             if (resultList[i].opening_hours) {
                 var placeOpen = resultList[i].opening_hours.open_now;
@@ -134,13 +165,9 @@ function grabGoogleData(location, query, apiKey) {
 
             }
 
-            else {
-                newOpen.html("No Hours Listed")
-            }
-
             newTitle.append(newOpen);
 
-            var newRating = $('<div>');
+            var newRating = $('<h6>');
             newRating.html('Average user rating: ' + placeRating);
 
             newTitle.append(newRating);
