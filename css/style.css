@@ -1,22 +1,51 @@
-.nav-wrapper {
+.nav-wrapper, .nav-content {
 	padding-left: 20px;
 }
 
-.label-icon {
-	/*padding-top: -15px;*/
-	/*padding-bottom: 20px;*/
+/*footer.page-footer, nav.nav-wrapper {
+	background-color: #EE6E73 !important; 
+}*/
+
+
+.carousel-item {
+	position: relative;
+	width: 100%;
 }
 
-.input-field {
-	/*padding-bottom: 20px;*/
-	/*padding-top: -15px;*/
+.photoText {
+	position: absolute;
+	top: 25px;
+	left: 0px;
+	color: white;
+	background-color: black;
+	padding: 20px;	
 }
 
-.page-footer {
-	background-color: #EE6E73; 
+.dropdown-content {
+	font-size: 14px !important;
 }
 
-.footer-copyright {
-	background-color: #EE6E73; 
-	
+a.dropdown-button {
+	width: 175px;
 }
+
+input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
+    width: 80% !important;
+}
+
+h5 {
+	color: #ffb74d;
+	font-size: 18px;
+	line-height: 80%;
+}
+
+h6 {
+	color: white;
+	line-height: 80%;
+	padding-left: 15px;
+}
+
+/*p.cityInfo {
+	font-size: 12px !important;
+}
+*/
