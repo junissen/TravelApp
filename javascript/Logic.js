@@ -24,18 +24,11 @@ var currentIndex = 0;
 
 grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex]);
 
-$(".searchCity").text(searchName + ": " + "Points of Interest");
-
-$('#search').keyup(function(event) {
+$('#searchMain').keyup(function(event) {
     if (event.keyCode === 13) {
         searchName = $(this).val();
         grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex]);
         $(this).val("");
-        $(".searchCity").text(searchName);
-        // $(".searchCity").text(searchName + " " + query);
-        console.log("1");
-        console.log(searchName);
-        // console.log(searchName + query);
     }
 });
 
@@ -45,9 +38,6 @@ $('#searchMenu').keyup(function(event) {
         searchName = $(this).val();
         grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex]);
         $(this).val("");
-        $(".searchCity").text(searchName);
-        console.log("2");
-        console.log(searchName);
     }
 });
 
@@ -117,22 +107,22 @@ function grabGoogleData(location, query, apiKey) {
 
          for (var i = 0; i < 10; i ++) {
 
-             var photoReference = resultList[i].photos[0].photo_reference;
-             var placeText = resultList[i].name;
-             var placeRating = resultList[i].rating;
-         
-             console.log(resultList[i]);
+            var photoReference = resultList[i].photos[0].photo_reference;
+            var placeText = resultList[i].name;
+            var placeRating = resultList[i].rating;
 
-             // Adding image
-             var newImage = $('<img>');
-             var src = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&maxheight=500&photoreference=" + photoReference + "&key=" + apiKey;
-             newImage.attr('src', src);
+            console.log(resultList[i]);
 
-             var newText = $('<p>');
-             newText.attr('class', 'photoText')
-             newText.html(placeText);
+            // Adding image
+            var newImage = $('<img>');
+            var src = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&maxheight=500&photoreference=" + photoReference + "&key=" + apiKey;
+            newImage.attr('src', src);
+
+            var newText = $('<p>');
+            newText.attr('class', 'photoText')
+            newText.html(placeText);
              
-             var newCarousel = $("<a>");
+            var newCarousel = $("<a>");
             newCarousel.attr('class', 'carousel-item')
             newCarousel.attr('href', '#' + counterList[counter] + '!')
             newCarousel.append(newImage);
