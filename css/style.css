@@ -6,6 +6,36 @@
 	background-color: #EE6E73 !important; 
 }*/
 
+#search {
+	height: 50px;
+	display: inline-block;
+	position: relative;
+	left: -20px;
+}
+
+#searchIcon {
+	font-size: 35px;
+	position: relative;
+	left: -60px;
+	top: -10px;
+}
+
+#searchMenu {
+	height: 50px;
+	display: inline-block;
+	position: relative;
+	left: -20px;
+	top: 20px;
+}
+
+#searchHeader {
+	color: black;
+	font-size: 20px;
+	font-weight: bold;
+	position: relative;
+	left: 30px;
+	margin-bottom: -20px;
+}
 
 .carousel-item {
 	position: relative;
@@ -30,7 +60,7 @@ a.dropdown-button {
 }
 
 input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
-    width: 80% !important;
+    width: 75% !important;
 }
 
 h5 {

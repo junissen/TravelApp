@@ -24,12 +24,37 @@ var currentIndex = 0;
 
 grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex]);
 
-$('#searchTerm').keyup(function(event) {
+$(".searchCity").text(searchName + ": " + "Points of Interest");
+
+$('#search').keyup(function(event) {
     if (event.keyCode === 13) {
         searchName = $(this).val();
         grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex]);
         $(this).val("");
+        $(".searchCity").text(searchName);
+        // $(".searchCity").text(searchName + " " + query);
+        console.log("1");
+        console.log(searchName);
+        // console.log(searchName + query);
     }
+});
+
+$('#searchMenu').keyup(function(event) {
+    if (event.keyCode === 13) {
+        $(".button-collapse").sideNav('hide');
+        searchName = $(this).val();
+        grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex]);
+        $(this).val("");
+        $(".searchCity").text(searchName);
+        console.log("2");
+        console.log(searchName);
+    }
+});
+
+$(".button-collapse").sideNav();
+
+$('#closeMenu').on("click", function(event) {
+    $(".button-collapse").sideNav('hide');
 });
 
 $('#pointsofInterest').on("click", function(event) {
@@ -43,6 +68,22 @@ $('#restaurants').on("click", function(event) {
 $('#hotels').on("click", function(event) {
     grabGoogleData(searchName, hotelQuery, apiKeyArray[currentIndex])
 });
+
+$('#pointsofInterestSideNav').on("click", function(event) {
+    $(".button-collapse").sideNav('hide');
+    grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex])
+});
+
+$('#restaurantsSideNav').on("click", function(event) {
+    $(".button-collapse").sideNav('hide');
+    grabGoogleData(searchName, restaurantQuery, apiKeyArray[currentIndex])
+});
+
+$('#hotelsSideNav').on("click", function(event) {
+    $(".button-collapse").sideNav('hide');
+    grabGoogleData(searchName, hotelQuery, apiKeyArray[currentIndex])
+});
+
 
 
 function grabGoogleData(location, query, apiKey) {
@@ -99,6 +140,22 @@ function grabGoogleData(location, query, apiKey) {
             carousel.append(newCarousel);
             
             // Adding info
+
+            var titleSub = ""
+
+            if (query === " point of interest") {
+                titleSub = "Top Points of Interests in "
+            }
+
+            else if (query === " restaurant") {
+                titleSub = "Top Restaurants in "
+            }
+
+            else if (query === " hotel") {
+                titleSub = "Top Hotels in "
+            }
+
+            $('.titleInfo').html(titleSub + location);
 
             var newTitle = $('<h5>');
             newTitle.attr('class', 'cityInfo');
