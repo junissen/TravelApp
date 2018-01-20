@@ -8,6 +8,8 @@ var geoplacesApiKey3 = 'AIzaSyA_rHgXs_vLb2tUX2qesrBdF0ijvGFA4GM';
 
 var geoplaceApiKey4 = 'AIzaSyDYDV-ay382NoDxM-WQTtSVzju6pp8v3yI';
 
+var geoMapsEmbedApiKey = 'AIzaSyCN2Ot2OCVfI9m7dkS9oAR5mPgM6_sVS9M'
+
 var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
 
 var searchName = 'Minneapolis';
@@ -80,6 +82,7 @@ function grabGoogleData(location, query, apiKey) {
 
     $('.photoCarousel').empty();
     $('.info').empty();
+    $('#map').empty();
 
     var geoplacesApiURL = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + location + query + "&language=en&key=" + apiKey;
     var newURL = cors_api_url + geoplacesApiURL;
@@ -178,7 +181,20 @@ function grabGoogleData(location, query, apiKey) {
 
          }
 
-         counter = 0;
+        counter = 0;
+
+        var newFrame = $('<iframe>');
+        // newFrame.attr('width', '400');
+        // newFrame.attr('height', '400');
+        newFrame.attr('width', '95%');
+        newFrame.attr('height', '500');
+        newFrame.attr('frameborder', '0');
+        newFrame.attr('style', 'border:0');
+        newFrame.attr('src', 'https://www.google.com/maps/embed/v1/place?q=' + location + "&key=" + geoMapsEmbedApiKey);
+        newFrame.attr('allowfullscreen');
+
+        $('.mapLocation').html("Map of " + location);
+        $('#map').append(newFrame);
 
         $('.photoCarousel').append(carousel);
         $('.carousel.carousel-slider.center').carousel({fullWidth:true});

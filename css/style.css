@@ -2,9 +2,12 @@
 	padding-left: 20px;
 }
 
-/*footer.page-footer, nav.nav-wrapper {
-	background-color: #EE6E73 !important; 
-}*/
+
+body {
+	margin-left: 100px;
+	margin-right: 100px;
+	background-image: url(../images/globe.jpg);
+}
 
 #searchMain {
 	height: 50px;
@@ -35,6 +38,12 @@
 	position: relative;
 	left: 30px;
 	margin-bottom: -20px;
+}
+
+#map {
+	margin-top: -10px;
+	position: relative;
+	left: 10px;
 }
 
 .carousel-item {
@@ -75,7 +84,3 @@ h6 {
 	padding-left: 15px;
 }
 
-/*p.cityInfo {
-	font-size: 12px !important;
-}
-*/
