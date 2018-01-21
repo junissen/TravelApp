@@ -6,9 +6,13 @@ var geoplacesApiKey2 = 'AIzaSyBla269WqKcDmjRCj1rqyTCw88wSwMIgQs';
 
 var geoplacesApiKey3 = 'AIzaSyA_rHgXs_vLb2tUX2qesrBdF0ijvGFA4GM';
 
-var geoplaceApiKey4 = 'AIzaSyDYDV-ay382NoDxM-WQTtSVzju6pp8v3yI';
+var geoplacesApiKey4 = 'AIzaSyDYDV-ay382NoDxM-WQTtSVzju6pp8v3yI';
 
-var geoMapsEmbedApiKey = 'AIzaSyCN2Ot2OCVfI9m7dkS9oAR5mPgM6_sVS9M'
+var geoplacesApiKey5 = 'AIzaSyAZEIrQAkq-XiUz7EvqcHi878-DUA2xCBM';
+
+var geoplacesApiKey6 = 'AIzaSyAtTcT_IofDsjFlCOzk6XQ3jP_YyQRplUI'
+
+var geoMapsEmbedApiKey = 'AIzaSyCN2Ot2OCVfI9m7dkS9oAR5mPgM6_sVS9M';
 
 var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
 
@@ -20,63 +24,78 @@ var restaurantQuery = " restaurant";
 
 var hotelQuery = " hotel";
 
-var apiKeyArray = [geoplacesApiKey0, geoplacesApiKey1, geoplacesApiKey2, geoplacesApiKey3, geoplaceApiKey4];
+var apiKeyArray = [geoplacesApiKey0, geoplacesApiKey1, geoplacesApiKey2, geoplacesApiKey3, geoplacesApiKey4, geoplacesApiKey5, geoplacesApiKey6];
 
 var currentIndex = 0;
 
-grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex]);
+$(document).ready(function() {
 
-$('#searchMain').keyup(function(event) {
-    if (event.keyCode === 13) {
-        searchName = $(this).val();
-        grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex]);
-        $(this).val("");
-    }
-});
+    grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex]);
 
-$('#searchMenu').keyup(function(event) {
-    if (event.keyCode === 13) {
+    // $('#search').keyup(function(event) {
+    //       var searchStr = $(this).val();
+    //       updateAutocomplete(searchStr);
+    // });
+
+    // $('#search').autocomplete().on("click", function(event) {
+    //     searchName = $('#search').val()
+    //     grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex]);
+    //     $('#search').val("");
+    // })
+
+    $('#search').keyup(function(event) {
+        if (event.keyCode === 13) {
+            searchName = $(this).val();
+            grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex]);
+            $(this).val("");
+        }
+    });
+
+    $(".button-collapse").sideNav();
+
+    $('#closeMenu').on("click", function(event) {
         $(".button-collapse").sideNav('hide');
-        searchName = $(this).val();
-        grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex]);
-        $(this).val("");
-    }
+    });
+
+    $('#pointsofInterest').on("click", function(event) {
+        grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex])
+    });
+
+    $('#restaurants').on("click", function(event) {
+        grabGoogleData(searchName, restaurantQuery, apiKeyArray[currentIndex])
+    });
+
+    $('#hotels').on("click", function(event) {
+        grabGoogleData(searchName, hotelQuery, apiKeyArray[currentIndex])
+    });
+
+    $('#pointsofInterestSideNav').on("click", function(event) {
+        $(".button-collapse").sideNav('hide');
+        grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex])
+    });
+
+    $('#restaurantsSideNav').on("click", function(event) {
+        $(".button-collapse").sideNav('hide');
+        grabGoogleData(searchName, restaurantQuery, apiKeyArray[currentIndex])
+    });
+
+    $('#hotelsSideNav').on("click", function(event) {
+        $(".button-collapse").sideNav('hide');
+        grabGoogleData(searchName, hotelQuery, apiKeyArray[currentIndex])
+    });
+
+    $('#testButtonForward').on("click", function(event) {
+        $('.carousel').carousel('next');
+        setTimeout(grabActiveImage, 300);
+    })
+
+    $('#testButtonBack').on("click", function(event) {
+        $('.carousel').carousel('prev');
+        setTimeout(grabActiveImage, 300);
+    })
+
+
 });
-
-$(".button-collapse").sideNav();
-
-$('#closeMenu').on("click", function(event) {
-    $(".button-collapse").sideNav('hide');
-});
-
-$('#pointsofInterest').on("click", function(event) {
-    grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex])
-});
-
-$('#restaurants').on("click", function(event) {
-    grabGoogleData(searchName, restaurantQuery, apiKeyArray[currentIndex])
-});
-
-$('#hotels').on("click", function(event) {
-    grabGoogleData(searchName, hotelQuery, apiKeyArray[currentIndex])
-});
-
-$('#pointsofInterestSideNav').on("click", function(event) {
-    $(".button-collapse").sideNav('hide');
-    grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex])
-});
-
-$('#restaurantsSideNav').on("click", function(event) {
-    $(".button-collapse").sideNav('hide');
-    grabGoogleData(searchName, restaurantQuery, apiKeyArray[currentIndex])
-});
-
-$('#hotelsSideNav').on("click", function(event) {
-    $(".button-collapse").sideNav('hide');
-    grabGoogleData(searchName, hotelQuery, apiKeyArray[currentIndex])
-});
-
-
 
 function grabGoogleData(location, query, apiKey) {
 
@@ -92,6 +111,7 @@ function grabGoogleData(location, query, apiKey) {
     var carousel = $('<div>');
     carousel.attr('class', 'carousel carousel-slider center');
     carousel.attr('data-indicators', 'true');
+
 
     $.ajax({
          url:newURL,
@@ -114,9 +134,12 @@ function grabGoogleData(location, query, apiKey) {
             var placeText = resultList[i].name;
             var placeRating = resultList[i].rating;
 
+            
             console.log(resultList[i]);
 
-            // Adding image
+            // Adding images in carousel
+
+
             var newImage = $('<img>');
             var src = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&maxheight=500&photoreference=" + photoReference + "&key=" + apiKey;
             newImage.attr('src', src);
@@ -150,11 +173,15 @@ function grabGoogleData(location, query, apiKey) {
 
             $('.titleInfo').html(titleSub + location);
 
-            var newTitle = $('<h5>');
-            newTitle.attr('class', 'cityInfo');
+            var newInfoDiv = $('<div>');
+            newInfoDiv.attr('class', 'cityInfo');
+            newInfoDiv.attr('id', '#' + counterList[counter] + '!');
+
+            var newTitle = $('<div>');
+            newTitle.attr('id', 'newPlaceTitle')
             newTitle.html(placeText);
-            newTitle.attr('href', '#' + counterList[counter] + '!');
-            var newOpen = $('<h6>');
+            var newOpen = $('<div>');
+            newOpen.attr('id', 'newPlaceOpen')
 
             if (resultList[i].opening_hours) {
                 var placeOpen = resultList[i].opening_hours.open_now;
@@ -168,14 +195,22 @@ function grabGoogleData(location, query, apiKey) {
 
             }
 
+            else {
+                newOpen.html("Always open")
+            }
+
             newTitle.append(newOpen);
 
-            var newRating = $('<h6>');
+            var newRating = $('<div>');
+            newRating.attr('id', 'newPlaceRating')
+
             newRating.html('Average user rating: ' + placeRating);
 
             newTitle.append(newRating);
 
-            $('.info').append(newTitle);
+            newInfoDiv.append(newTitle);
+
+            $('.info').append(newInfoDiv);
 
             counter ++;
 
@@ -195,8 +230,40 @@ function grabGoogleData(location, query, apiKey) {
 
         $('.mapLocation').html("Map of " + location);
         $('#map').append(newFrame);
-
         $('.photoCarousel').append(carousel);
-        $('.carousel.carousel-slider.center').carousel({fullWidth:true});
+
+        $('.carousel.carousel-slider').carousel({fullWidth:true, indicators:false});
+
+        console.log('--------------------------------');
+        grabActiveImage();
      });
 }
+
+function grabActiveImage() {
+    $('.cityInfo').attr('style', "background-color: none")
+    var activePhoto = $('a.carousel-item.active');
+    var hrefValue = activePhoto[0].hash;
+    var textAttr = $('.cityInfo[id="' + hrefValue + '"]');
+    textAttr.attr('style', "background-color: red");
+}
+
+    // function updateAutocomplete(searchStr) {
+    //   var availableTags = {};
+    //   jQuery.getJSON("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json?key=" + "AIzaSyDfhVC4Hbd8rWHg1IrIONTu7BXot7liwq8" + "&input=" + searchStr)
+    //     .done(function(response) {
+    //         for (var i=0; i < response.predictions.length; i++) {
+    //             var options = response.predictions[i].description;
+    //             availableTags[options]=null;
+    //         }
+    //         console.log(availableTags);
+    //         $('#search').autocomplete({
+    //           data: availableTags,
+    //           limit: 40, // The max amount of results that can be shown at once. Default: Infinity.
+    //           onAutocomplete: function(val) {
+    //             // Callback function when value is autcompleted.
+    //             // console.log("autocompleted")
+    //           },
+    //           minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+    //         });
+    //     });
+    // }

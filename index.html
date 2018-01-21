@@ -24,30 +24,10 @@
 				
 						
 						<ul class="right hide-on-med-and-down" id="nav-mobile">
-							<li>
-								<form>
-							        <div class="input-field">
-							          <label class="label-icon" for="search"><i class="material-icons" id="searchIcon">search</i></label>
-							          <input id="searchMain" type="search" placeholder="Enter city">
-							          <i class="material-icons">close</i>
-							        </div>
-						    	</form>
-						    </li>
 							<li><a class="dropdown-button" href="#!" data-activates="dropdown1">Menu<i class="material-icons right">arrow_drop_down</i></a></li>
 					    </ul>	
 
 					   	<ul class="side-nav" id="mobile-demo">
-					   		<li class="list">
-					   			<div id="searchHeader">Search</div>
-								<form>
-							        <div class="input-field">
-							          <label class="label-icon" for="searchMenu"><i class="material-icons" id="searchIconMenu">search</i></label>
-							          <input id="searchMenu" type="search"  placeholder="Enter city">
-							          <i class="material-icons" id="closeMenu">close</i>
-							        </div>
-						    	</form>
-							</li>
-							<li class="divider"></li>
 							<li class="list"><a href="#!" id="pointsofInterestSideNav">Points of Interest</a></li>
 							<li class="divider"></li>
 							<li class="list"><a href="#!" id="restaurantsSideNav">Restaurants</a></li>
@@ -56,6 +36,18 @@
 						</ul>
 
 					</div>
+
+					<div class="row">
+                        <div class="input-field col s12">
+                          <form>
+                                <div class="input-field col s12">
+                                  <label class="label-icon" for="search"><i class="material-icons" id="searchIcon">search</i></label>
+                                  <input class="autocomplete" id="search" type="search" placeholder="Enter city">
+                                  <i class="material-icons">close</i>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
 
 					<div class="nav-content">
 						<img src="images/snow.jfif" style="opacity: 0.7" height="80px">
@@ -73,20 +65,18 @@
 					<li class="list"><a href="#!" id="hotels">Hotels</a></li>
 				</ul>
 
-
-				<div class="carousel carousel-slider center">
-					<div class="row">
-						<div class = "col s1 m2">
-						</div>
-						<div class = "col s10 m8">
-						  <div class="container photoCarousel">
-						  </div>
-						</div>
-						<div class = "col s1 m2">
-						</div>
-					</div>	
-				</div>
-
+				<div class="row">
+					<div class = "col s1 m1">
+						<button id="testButtonBack">Test Button Back</button>
+					</div>
+					<div class = "col s10 m10">
+					  <div class="container photoCarousel">
+					  </div>
+					</div>
+					<div class = "col s1 m1">
+						<button id="testButtonForward">Test Button Forward</button>
+					</div>
+				</div>	
 
 				<div class="row">
 					<div class="col s12 m6">
@@ -131,7 +121,6 @@
 					</ul>
 				</nav>
 
-		    </div>
 
 
             
