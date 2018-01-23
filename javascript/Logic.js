@@ -1,3 +1,16 @@
+var config = {
+    apiKey: "AIzaSyDe26dXdinNMwrd5ZcMCF50NaHHplhHP0w",
+    authDomain: "travelapp-7ed71.firebaseapp.com",
+    databaseURL: "https://travelapp-7ed71.firebaseio.com",
+    projectId: "travelapp-7ed71",
+    storageBucket: "",
+    messagingSenderId: "651038382322"
+    };
+
+firebase.initializeApp(config);
+
+var database = firebase.database();
+
 var geoplacesApiKey0 = 'AIzaSyBtFyKPzOmCiguFJEQNXfRdMsqIia2oqSk';
 
 var geoplacesApiKey1 = 'AIzaSyAGSfQ__issw6jvRIGyAspjxxwV53GTP5c';
@@ -32,23 +45,9 @@ $(document).ready(function() {
 
     grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex]);
 
-    // $('#search').keyup(function(event) {
-    //       var searchStr = $(this).val();
-    //       updateAutocomplete(searchStr);
-    // });
-
-    // $('#search').autocomplete().on("click", function(event) {
-    //     searchName = $('#search').val()
-    //     grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex]);
-    //     $('#search').val("");
-    // })
-
     $('#search').keyup(function(event) {
-        if (event.keyCode === 13) {
-            searchName = $(this).val();
-            grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex]);
-            $(this).val("");
-        }
+          var searchStr = $(this).val();
+          updateAutocomplete(searchStr);
     });
 
     $(".button-collapse").sideNav();
@@ -84,16 +83,29 @@ $(document).ready(function() {
         grabGoogleData(searchName, hotelQuery, apiKeyArray[currentIndex])
     });
 
-    $('#testButtonForward').on("click", function(event) {
+    $('#buttonForward').on("click", function(event) {
         $('.carousel').carousel('next');
         setTimeout(grabActiveImage, 300);
     })
 
-    $('#testButtonBack').on("click", function(event) {
+    $('#buttonBack').on("click", function(event) {
         $('.carousel').carousel('prev');
         setTimeout(grabActiveImage, 300);
     })
 
+    database.ref().on("child_added", function(childSnapshot) {
+    var recentSearches = $('<p>');
+    recentSearches.attr('id', 'recentSearches');
+    recentSearches.html("Recent Searches on TravelOn");
+
+    var recentCities = $('<p>');
+    var recentCities = childSnapshot.val().searchCity;
+
+    recentSearches.append(recentCities);
+
+    $('.recentSearches').append(recentSearches);
+
+    })
 
 });
 
@@ -112,7 +124,6 @@ function grabGoogleData(location, query, apiKey) {
     carousel.attr('class', 'carousel carousel-slider center');
     carousel.attr('data-indicators', 'true');
 
-
     $.ajax({
          url:newURL,
          async: false,
@@ -121,7 +132,6 @@ function grabGoogleData(location, query, apiKey) {
          // Adding place of interest photos
          var resultList = response.results;
 
-         // console.log(resultList);
 
          if (resultList.length === 0) {
              currentIndex ++
@@ -147,12 +157,15 @@ function grabGoogleData(location, query, apiKey) {
             var newText = $('<p>');
             newText.attr('class', 'photoText')
             newText.html(placeText);
-             
+
             var newCarousel = $("<a>");
             newCarousel.attr('class', 'carousel-item')
-            newCarousel.attr('href', '#' + counterList[counter] + '!')
+            newCarousel.attr('href', '#' + counterList[counter] + '!');
+            newCarousel.attr('id', placeText);
             newCarousel.append(newImage);
             newCarousel.append(newText);
+
+
             carousel.append(newCarousel);
             
             // Adding info
@@ -177,10 +190,10 @@ function grabGoogleData(location, query, apiKey) {
             newInfoDiv.attr('class', 'cityInfo');
             newInfoDiv.attr('id', '#' + counterList[counter] + '!');
 
-            var newTitle = $('<div>');
+            var newTitle = $('<h5>');
             newTitle.attr('id', 'newPlaceTitle')
             newTitle.html(placeText);
-            var newOpen = $('<div>');
+            var newOpen = $('<h6>');
             newOpen.attr('id', 'newPlaceOpen')
 
             if (resultList[i].opening_hours) {
@@ -201,7 +214,7 @@ function grabGoogleData(location, query, apiKey) {
 
             newTitle.append(newOpen);
 
-            var newRating = $('<div>');
+            var newRating = $('<h6>');
             newRating.attr('id', 'newPlaceRating')
 
             newRating.html('Average user rating: ' + placeRating);
@@ -218,52 +231,105 @@ function grabGoogleData(location, query, apiKey) {
 
         counter = 0;
 
-        var newFrame = $('<iframe>');
-        // newFrame.attr('width', '400');
-        // newFrame.attr('height', '400');
-        newFrame.attr('width', '95%');
-        newFrame.attr('height', '500');
-        newFrame.attr('frameborder', '0');
-        newFrame.attr('style', 'border:0');
-        newFrame.attr('src', 'https://www.google.com/maps/embed/v1/place?q=' + location + "&key=" + geoMapsEmbedApiKey);
-        newFrame.attr('allowfullscreen');
-
         $('.mapLocation').html("Map of " + location);
-        $('#map').append(newFrame);
         $('.photoCarousel').append(carousel);
 
         $('.carousel.carousel-slider').carousel({fullWidth:true, indicators:false});
 
         console.log('--------------------------------');
         grabActiveImage();
+        grabWeatherData();
+
+        database.ref().set({
+            searchCity: location,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
+        })
+
      });
 }
 
 function grabActiveImage() {
+    $('#map').empty();
+
     $('.cityInfo').attr('style', "background-color: none")
     var activePhoto = $('a.carousel-item.active');
     var hrefValue = activePhoto[0].hash;
     var textAttr = $('.cityInfo[id="' + hrefValue + '"]');
-    textAttr.attr('style', "background-color: red");
+    textAttr.attr('style', "background-color: rgba(77,167,203,1)");
+
+    var textValue = activePhoto[0].id;
+
+    var newFrame = $('<iframe>');
+    newFrame.attr('width', '95%');
+    newFrame.attr('height', '500');
+    newFrame.attr('frameborder', '0');
+    newFrame.attr('style', 'border:0');
+    newFrame.attr('src', 'https://www.google.com/maps/embed/v1/place?q=' + textValue  + ',' + searchName + '&key=' + geoMapsEmbedApiKey);
+    newFrame.attr('allowfullscreen');
+
+    $('#map').append(newFrame);
+
 }
 
-    // function updateAutocomplete(searchStr) {
-    //   var availableTags = {};
-    //   jQuery.getJSON("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json?key=" + "AIzaSyDfhVC4Hbd8rWHg1IrIONTu7BXot7liwq8" + "&input=" + searchStr)
-    //     .done(function(response) {
-    //         for (var i=0; i < response.predictions.length; i++) {
-    //             var options = response.predictions[i].description;
-    //             availableTags[options]=null;
-    //         }
-    //         console.log(availableTags);
-    //         $('#search').autocomplete({
-    //           data: availableTags,
-    //           limit: 40, // The max amount of results that can be shown at once. Default: Infinity.
-    //           onAutocomplete: function(val) {
-    //             // Callback function when value is autcompleted.
-    //             // console.log("autocompleted")
-    //           },
-    //           minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
-    //         });
-    //     });
-    // }
+
+function updateAutocomplete(searchStr) {
+  var availableTags = {};
+  jQuery.getJSON("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json?key=" + "AIzaSyDfhVC4Hbd8rWHg1IrIONTu7BXot7liwq8" + "&input=" + searchStr)
+    .done(function(response) {
+
+
+        for (var i=0; i < response.predictions.length; i++) {
+            var options = response.predictions[i].description;
+            availableTags[options]=null;
+        }
+
+
+        $('#search').autocomplete({
+            data: availableTags,
+            limit: 40, // The max amount of results that can be shown at once. Default: Infinity.
+            minLength: 1,
+          onAutocomplete: function(data) {
+            // Callback function when value is autocompleted
+            search = String(data);
+            searchString = search.split(",");
+            searchName = searchString[0];
+            grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex]);
+            $('#search').val("");
+          },
+        });
+    });
+}
+
+function grabWeatherData () {
+
+    $('.weather').empty();
+
+    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + searchName +
+    "&APPID=7aea8d220d0b2f4f285d3790fe8b6d9f";
+    $.ajax({
+    url: queryURL,
+    method: "GET"
+    }).done(function(response) {
+    
+        var currentWeather = response.weather[0].main;
+        var currentTemp = Math.floor((response.main.temp * (9/5)) - 459.67);
+        
+        var weatherDiv = $('<div>');
+        var title = $('<p>');
+        title.attr('id', 'weatherTitle');
+        title.html("Current weather in " + searchName );
+        var weather = $('<p>');
+        weather.attr('id', 'weatherCond');
+        weather.html("Conditions: " + currentWeather);
+        var temp = $('<p>');
+        temp.attr('id', 'weatherTemp');
+        temp.html("Temperature: " + currentTemp + "°F");
+
+        weatherDiv.append(title);
+        weatherDiv.append(weather);
+        weatherDiv.append(temp);
+
+        $('.weather').append(weatherDiv);
+
+    });
+}

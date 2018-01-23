@@ -19,7 +19,7 @@
 
 		    	<nav class="nav-extended">
 					<div class="nav-wrapper">
-						<a href="#!" class="brand-logo"><i class="material-icons">language</i>TravelOn</a>
+						<a href="#!" class="brand-logo"><i class="material-icons" id="globe">language</i>TravelOn</a>
 						<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 				
 						
@@ -49,10 +49,14 @@
                         </div>
                     </div>
 
-					<div class="nav-content">
-						<img src="images/snow.jfif" style="opacity: 0.7" height="80px">
-						<p>Current Weather</p>
-						<p class="weather"></p>
+                    <div class="row">
+
+						<div class="nav-content col s6 weather">		
+						</div>
+
+						<div class="nav-content col s6 recentSearchs">
+						</div>
+
 					</div>
 
 				</nav>
@@ -65,18 +69,26 @@
 					<li class="list"><a href="#!" id="hotels">Hotels</a></li>
 				</ul>
 
-				<div class="row">
-					<div class = "col s1 m1">
-						<button id="testButtonBack">Test Button Back</button>
+				<div class="row rowCarousel">
+					
+					<div class="col s12 m12 l1">
+						<button id='buttonBack'>Previous</button>
 					</div>
-					<div class = "col s10 m10">
-					  <div class="container photoCarousel">
-					  </div>
+
+
+					<div class="col s12 m12 l10">
+						<div class="container photoCarousel">
+					
+						</div>
 					</div>
-					<div class = "col s1 m1">
-						<button id="testButtonForward">Test Button Forward</button>
+
+					<div class="col s12 m12 l1">
+						<button id='buttonForward'>Next</button>
 					</div>
+
+
 				</div>	
+
 
 				<div class="row">
 					<div class="col s12 m6">
@@ -87,11 +99,6 @@
 								
 								</div>
 							</div>	
-
-				            <div class="card-action">
-				              <a href="#">This is a link</a>
-				              <a href="#">This is a link</a>
-				            </div>
 
 				        </div>
 
@@ -109,24 +116,22 @@
 			    </div>
 
 				<nav class="nav-wrapper red lighten-1 footWrapper">
-					<div class="left">© 2018 Copyright</div>
-					<div class="links right hide-on-med-and-down">
-					<ul>
-						<li>Website Contributors: </li>
-						<li><a class="grey-text text-lighten-4" href="https://www.linkedin.com/in/julia-nissen-1b499437/">Julia Nissen, </a></li>
-						<li><a class="grey-text text-lighten-4" href="https://www.linkedin.com/in/mohamedamin-kedir-baa72b142/">Amin Kedir, </a></li>
-						<li><a class="grey-text text-lighten-4" href="https://www.linkedin.com/in/sara-bracewell-3b952761/">Sara Bracewell </a></li>
-						<li>and</li> 
-						<li><a class="grey-text text-lighten-4" href="https://www.linkedin.com/in/walterzuschlag/">Walter Zuschlag</a></li>
-					</ul>
+					<div class="left">©2018 Copyright Amazing Travelers</div>
+
+					 <ul class="links right contributors">
+                        <li><a class="grey-text text-lighten-4" href="https://www.linkedin.com/in/julia-nissen-1b499437/">Julia Nissen,</a></li>
+                        <li><a class="grey-text text-lighten-4" href="https://www.linkedin.com/in/mohamedamin-kedir-baa72b142/">Amin Kedir,</a></li>
+                        <li><a class="grey-text text-lighten-4" href="https://www.linkedin.com/in/sara-bracewell-3b952761/">Sara Bracewell,</a></li>
+                        <li><a class="grey-text text-lighten-4" href="https://www.linkedin.com/in/walterzuschlag/">Walter Zuschlag</a></li>
+                    </ul>
+                   
 				</nav>
 
 
-
-            
-		<!--Import jQuery before materialize.js-->
-		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-		<script type="text/javascript" src="javascript/Logic.js"></script>
-	</body>
-  </html>
+	<!-- Import jQuery before materialize.js -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+	<script type="text/javascript" src="javascript/Logic.js"></script>
+</body>
+</html>
