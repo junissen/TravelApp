@@ -44,7 +44,6 @@ $(document).ready(function() {
             grabGoogleData(searchName, pointofInterestQuery, apiKeyArray[currentIndex])
             $('#search').val("");
           }
-
     });
 
 
@@ -76,21 +75,49 @@ $(document).ready(function() {
     $('#buttonForward').on("click", function(event) {
         $('.carousel').carousel('next');
         setTimeout(grabActiveImage, 300);
-    })
+    });
+
     $('#buttonBack').on("click", function(event) {
         $('.carousel').carousel('prev');
         setTimeout(grabActiveImage, 300);
-    })
+    });
+
+    var dataLoaded = false;
+
 
     database.ref().on("child_added", function(childSnapshot) {
+
+        if (dataLoaded) {
+            $('.recentSearches').empty();
+            $('.recentSearches').html("Most recent search on TravelOn: ")
+            var newDiv = $('<div>');
+            newDiv.attr('id', 'searchDiv');
+            var recentCities = $('<p>');
+            recentCities.html(childSnapshot.val().searchCity);
+            newDiv.prepend(recentCities);
+            $('.recentSearches').append(newDiv);
+        }
+    })
+
+    database.ref().once("value", function(snapshot) {
+
+        var snapshotArray = []
+
+        snapshot.forEach(function(data) {
+            snapshotArray.push(data.val().searchCity)
+        })
+
         $('.recentSearches').empty();
         $('.recentSearches').html("Most recent search on TravelOn: ")
         var newDiv = $('<div>');
         newDiv.attr('id', 'searchDiv');
         var recentCities = $('<p>');
-        recentCities.html(childSnapshot.val().searchCity);
+        recentCities.html(snapshotArray[snapshotArray.length - 1]);
         newDiv.prepend(recentCities);
         $('.recentSearches').append(newDiv);
+
+        dataLoaded = true
+
     })
 
 });
@@ -220,12 +247,20 @@ function grabActiveImage() {
 
 function updateAutocomplete(searchStr) {
   var availableTags = {};
-  jQuery.getJSON("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json?key=" + "AIzaSyDfhVC4Hbd8rWHg1IrIONTu7BXot7liwq8" + "&input=" + searchStr)
+  var options = {
+    types: ['(cities)']
+  };
+  jQuery.getJSON("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json?key=" + "AIzaSyDfhVC4Hbd8rWHg1IrIONTu7BXot7liwq8" + "&input=" + searchStr + "&options=" + options)
     .done(function(response) {
-        for (var i=0; i < response.predictions.length; i++) {
-            var options = response.predictions[i].description;
-            availableTags[options]=null;
-        }
+
+            for (var i=0; i < response.predictions.length; i++) {
+
+                if ( (response.predictions[i].types[0] === "locality") || (response.predictions[i].types[0] === "country") ) {
+                    var options = response.predictions[i].description;
+                    availableTags[options]=null;
+                }
+            }
+
         $('#search').autocomplete({
             data: availableTags,
             limit: 40, // The max amount of results that can be shown at once. Default: Infinity.
@@ -256,9 +291,10 @@ function grabWeatherData () {
         var currentTemp = Math.floor((response.main.temp * (9/5)) - 459.67);
         
         var weatherDiv = $('<div>');
-        var title = $('<h5>');
+        var title = $('<h4>');
         title.attr('id', 'weatherTitle');
-        title.html("Current location: " + searchName );
+
+        title.html(searchName );
         var weather = $('<h6>');
         weather.attr('id', 'weatherCond');
         weather.html("Weather Conditions: " + currentWeather);
