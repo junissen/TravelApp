@@ -1,9 +1,9 @@
 # TravelApp
-#### Travel Application for Project 1 of UMN Bootcamp
+ Travel Application for Project 1 of UMN Bootcamp
 
-#### Team name - Amazing Travels
+ Team name - Amazing Travels
 
-#### Team members -  Julia Nissen, Amin Kedir, Sara Bracewell, Walter Zuschlag
+ Team members -  Julia Nissen, Amin Kedir, Sara Bracewell, Walter Zuschlag
 
 ### Overall application’s concept: 
 	To educate future travelers of fantastic travel locations and provide a variety  which include Points of interest, Local restaurants and Hotels. 
