@@ -1,18 +1,17 @@
-# TravelApp
-#H2 Travel Application for Project 1 of UMN Bootcamp
+## Travel Application for Project 1 of UMN Bootcamp
 
-#H2 Team name - Amazing Travels
+## Team name - Amazing Travels
 
-#H2 Team members -  Julia Nissen, Amin Kedir, Sara Bracewell, Walter Zuschlag
+## Team members -  Julia Nissen, Amin Kedir, Sara Bracewell, Walter Zuschlag
 
-#H3 Overall application’s concept: 
+### Overall application’s concept: 
 	To educate future travelers of fantastic travel locations and provide a variety  which include Points of interest, Local restaurants and Hotels. 
 
-#H3 The motivation for its development:
+### The motivation for its development:
 	Destination traveling is a passion of our team and the motivation was to create a website that packages our travel interests into one website instead of searching multiple travel sites. User friendly interface on one page.
 
-#H3 Our design process:
-..*	Our design process consisted of meeting as a group.
+### Our design process:
+  *	Our design process consisted of meeting as a group.
 ..*	Discussing our strengths and weaknesses.
 ..*	Breaking down into two groups for front and back end design.
 ..*	Discuss the technologies and libraries of interest to use. 
