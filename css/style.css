@@ -1,3 +1,9 @@
+/*Body background styling*/
+body {
+    background-image: url(../images/background.png);
+}
+
+/*Nav Bar Styling*/
 .nav-wrapper, .nav-content {
     padding-left: 15px;
 }
@@ -16,11 +22,7 @@ nav .input-field {
 nav .brand-logo i, nav .brand-logo [class^="mdi-"], nav .brand-logo [class*="mdi-"], nav .brand-logo i.material-icons {
     margin-right: 3px;
 }
-body {
-/*  margin-left: 100px;
-    margin-right: 100px;*/
-    background-image: url(../images/background.png);
-}
+
 #search {
     height: 40px;
     display: inline-block;
@@ -46,44 +48,32 @@ body {
     left: 30px;
     margin-bottom: -20px;
 }
+
+#searchDiv {
+    display: inline-block;
+}
+
+.recentSearches {
+    padding-top: 0px;
+    margin-top: -35px;
+    padding-bottom: 0px;
+}
+
+.dropdown-content {
+    font-size: 14px !important;
+}
+a.dropdown-button {
+    width: 200px;
+}
+input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
+    width: 75% !important;
+}
+
+/*Photos and weather row styling*/
 .photoCarousel {
     margin-top: -10px;
     width: 50%;
 }
-
-.weather {
-    text-align: center;
-}
-
-#weatherTitle {
-    font-size: 40px;
-    font-weight: bold;
-    color: black;
-}
-
-#weatherCond {
-    display: inline-block;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-bottom: -10px;
-    color: black;
-}
-#weatherTemp {
-    display: inline-block;
-    margin-bottom: -10px;
-    color: black;
-}
-
-#middle-panel {
-    padding-bottom: 10px;
-}
-
-#map {
-    margin-top: -10px;
-    position: relative;
-    left: 10px;
-}
-
 .photoContainer {
     margin-left: 5px;
     margin-right: 5px;
@@ -123,15 +113,45 @@ body {
     padding: 3px;
 }
 
-.dropdown-content {
-    font-size: 14px !important;
+.indicators{
+    visibility: hidden;
 }
-a.dropdown-button {
-    width: 200px;
+
+.weather {
+    text-align: center;
 }
-input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
-    width: 75% !important;
+
+#weatherTitle {
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
 }
+
+#weatherCond {
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: -10px;
+    color: black;
+}
+#weatherTemp {
+    display: inline-block;
+    margin-bottom: -10px;
+    color: black;
+}
+
+#middle-panel {
+    padding-bottom: 10px;
+}
+
+#map {
+    margin-top: -10px;
+    position: relative;
+    left: 10px;
+}
+
+/*Styling for info and map card*/
+
 h5 {
     color: #ffb74d;
     font-size: 18px;
@@ -160,20 +180,9 @@ h6 {
     line-height: 80%;
     padding-left: 15px;
 }
-.indicators{
-    visibility: hidden;
-}
 
-#searchDiv {
-    display: inline-block;
-}
 
-.recentSearches {
-    padding-top: 0px;
-    margin-top: -35px;
-    padding-bottom: 0px;
-}
-
+/*Styling for bottom wrapper*/
 .footWrapper {
     background-image: url('../images/bottom-image.jpg')
 }
