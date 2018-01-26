@@ -316,7 +316,7 @@ function updateAutocomplete(searchStr) {
 // Function to grab weather data of current search lcoation and display it
 function grabWeatherData () {
     $('.weather').empty();
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + searchName +
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + searchName +
     "&APPID=7aea8d220d0b2f4f285d3790fe8b6d9f";
     $.ajax({
     url: queryURL,
